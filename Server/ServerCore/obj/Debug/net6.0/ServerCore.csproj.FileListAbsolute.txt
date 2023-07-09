@@ -1,0 +1,15 @@
+C:\Users\woosa\source\repos\Server\ServerCore\bin\Debug\net6.0\ServerCore.exe
+C:\Users\woosa\source\repos\Server\ServerCore\bin\Debug\net6.0\ServerCore.deps.json
+C:\Users\woosa\source\repos\Server\ServerCore\bin\Debug\net6.0\ServerCore.runtimeconfig.json
+C:\Users\woosa\source\repos\Server\ServerCore\bin\Debug\net6.0\ServerCore.dll
+C:\Users\woosa\source\repos\Server\ServerCore\bin\Debug\net6.0\ServerCore.pdb
+C:\Users\woosa\source\repos\Server\ServerCore\obj\Debug\net6.0\ServerCore.csproj.AssemblyReference.cache
+C:\Users\woosa\source\repos\Server\ServerCore\obj\Debug\net6.0\ServerCore.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\woosa\source\repos\Server\ServerCore\obj\Debug\net6.0\ServerCore.AssemblyInfoInputs.cache
+C:\Users\woosa\source\repos\Server\ServerCore\obj\Debug\net6.0\ServerCore.AssemblyInfo.cs
+C:\Users\woosa\source\repos\Server\ServerCore\obj\Debug\net6.0\ServerCore.csproj.CoreCompileInputs.cache
+C:\Users\woosa\source\repos\Server\ServerCore\obj\Debug\net6.0\ServerCore.dll
+C:\Users\woosa\source\repos\Server\ServerCore\obj\Debug\net6.0\refint\ServerCore.dll
+C:\Users\woosa\source\repos\Server\ServerCore\obj\Debug\net6.0\ServerCore.pdb
+C:\Users\woosa\source\repos\Server\ServerCore\obj\Debug\net6.0\ServerCore.genruntimeconfig.cache
+C:\Users\woosa\source\repos\Server\ServerCore\obj\Debug\net6.0\ref\ServerCore.dll
