@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\woosa\\source\\repos\\Server\\ServerCore\\ServerCore.csproj",
+      "projectUniqueName": "D:\\ForUnity\\Unity_Rookiss_Part4\\Server\\ServerCore\\ServerCore.csproj",
       "projectName": "ServerCore",
-      "projectPath": "C:\\Users\\woosa\\source\\repos\\Server\\ServerCore\\ServerCore.csproj",
+      "projectPath": "D:\\ForUnity\\Unity_Rookiss_Part4\\Server\\ServerCore\\ServerCore.csproj",
       "packagesPath": "C:\\Users\\woosa\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\woosa\\source\\repos\\Server\\ServerCore\\obj\\",
+      "outputPath": "D:\\ForUnity\\Unity_Rookiss_Part4\\Server\\ServerCore\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\woosa\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\woosa\\source\\repos\\Server\\DummyClient\\DummyClient.csproj": {}
+    "D:\\ForUnity\\Unity_Rookiss_Part4\\Server\\DummyClient\\DummyClient.csproj": {}
   },
   "projects": {
-    "C:\\Users\\woosa\\source\\repos\\Server\\DummyClient\\DummyClient.csproj": {
+    "D:\\ForUnity\\Unity_Rookiss_Part4\\Server\\DummyClient\\DummyClient.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\woosa\\source\\repos\\Server\\DummyClient\\DummyClient.csproj",
+        "projectUniqueName": "D:\\ForUnity\\Unity_Rookiss_Part4\\Server\\DummyClient\\DummyClient.csproj",
         "projectName": "DummyClient",
-        "projectPath": "C:\\Users\\woosa\\source\\repos\\Server\\DummyClient\\DummyClient.csproj",
+        "projectPath": "D:\\ForUnity\\Unity_Rookiss_Part4\\Server\\DummyClient\\DummyClient.csproj",
         "packagesPath": "C:\\Users\\woosa\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\woosa\\source\\repos\\Server\\DummyClient\\obj\\",
+        "outputPath": "D:\\ForUnity\\Unity_Rookiss_Part4\\Server\\DummyClient\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\woosa\\AppData\\Roaming\\NuGet\\NuGet.Config",

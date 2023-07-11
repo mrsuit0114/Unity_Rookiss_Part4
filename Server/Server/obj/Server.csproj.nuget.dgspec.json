@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\woosa\\source\\repos\\Server\\Server\\Server.csproj": {}
+    "D:\\ForUnity\\Unity_Rookiss_Part4\\Server\\Server\\Server.csproj": {}
   },
   "projects": {
-    "C:\\Users\\woosa\\source\\repos\\Server\\Server\\Server.csproj": {
+    "D:\\ForUnity\\Unity_Rookiss_Part4\\Server\\Server\\Server.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\woosa\\source\\repos\\Server\\Server\\Server.csproj",
+        "projectUniqueName": "D:\\ForUnity\\Unity_Rookiss_Part4\\Server\\Server\\Server.csproj",
         "projectName": "Server",
-        "projectPath": "C:\\Users\\woosa\\source\\repos\\Server\\Server\\Server.csproj",
+        "projectPath": "D:\\ForUnity\\Unity_Rookiss_Part4\\Server\\Server\\Server.csproj",
         "packagesPath": "C:\\Users\\woosa\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\woosa\\source\\repos\\Server\\Server\\obj\\",
+        "outputPath": "D:\\ForUnity\\Unity_Rookiss_Part4\\Server\\Server\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\woosa\\AppData\\Roaming\\NuGet\\NuGet.Config",

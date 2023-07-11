@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "LdEQYexdKEwcGCRLkoKE4wmjQTAUMUsWrEEA1J+A+wMiX8Lm/WAAP1AbGDO1eXzeSeHIEzCtczmQPgpQwSATAw==",
+  "dgSpecHash": "UkTVUxrZwD1rZVi2buRP8nreKM8erqT2VQq/i92h8CNNnPBLcVNzjKNPzHeR0dvkoc9RC92jdG+QwdYSRhrX7A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\woosa\\source\\repos\\Server\\DummyClient\\DummyClient.csproj",
+  "projectFilePath": "D:\\ForUnity\\Unity_Rookiss_Part4\\Server\\DummyClient\\DummyClient.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
