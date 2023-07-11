@@ -1,40 +1,53 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-using ServerCore;
 
-int count = 0;
-Lock _lock = new Lock();
+using System.Diagnostics;
+using System.Net;
+using System.Net.Sockets;
+using System.Text;
 
-Task t1 = new Task(delegate ()
+Console.WriteLine("Code Start") ;
+string host = Dns.GetHostName();
+Console.WriteLine(host);
+IPHostEntry ipHost = Dns.GetHostEntry(host);
+Console.WriteLine(ipHost);
+IPAddress ipAddr = ipHost.AddressList[0];
+Console.WriteLine(ipAddr);
+IPEndPoint endPoint = new IPEndPoint(ipAddr, 7777);
+
+Console.WriteLine("Code Start") ;
+//문지기
+Socket listenSocket = new Socket(endPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+
+try
 {
-    for (int i = 0; i < 100000; i++)
-    {
-        _lock.WriteLock();
-        _lock.WriteLock();
-        count++;
-        _lock.WriteUnLock();
-        _lock.WriteUnLock();
-    }
-});
+    // 문지기 교육
+    listenSocket.Bind(endPoint);
 
-Task t2 = new Task(delegate ()
+    // 영업시작, 최대 대기수
+    listenSocket.Listen(10);
+
+    while (true)
+    {
+        Console.WriteLine("Listening...");
+
+        Socket clientSocket = listenSocket.Accept();  // 클라이언트 접속이 안하면 리턴이안됨 -> 해당코드에서 대기
+
+        byte[] recvBuff = new byte[1024];
+        int recvBytes = clientSocket.Receive(recvBuff);
+        string recvData = Encoding.UTF8.GetString(recvBuff, 0, recvBytes);
+        Console.WriteLine($"[From Client] : {recvData}");
+
+        byte[] sendBuff = Encoding.UTF8.GetBytes("Welcome to MMORPG Server !");
+        clientSocket.Send(sendBuff);
+
+        // 연결 끊기
+        clientSocket.Shutdown(SocketShutdown.Both);
+        clientSocket.Close();
+    }
+}
+catch (Exception e)
 {
-    for (int i = 0; i < 100000; i++)
-    {
-        _lock.WriteLock();
-        count--;
-        _lock.WriteUnLock();
-    }
-});
-
-t1.Start();
-t2.Start();
-
-// 기다리지 않으면 메인쓰레드 종료시 다 종료되는듯 -> 0
-Task.WaitAll(t1, t2);
-Console.WriteLine(count);
-
-
-
-
+    Console.WriteLine(e.ToString());
+}
 
