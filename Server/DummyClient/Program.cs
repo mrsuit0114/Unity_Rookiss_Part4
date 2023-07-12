@@ -5,32 +5,41 @@ using System.Net.Sockets;
 using System.Text;
 
 string host = Dns.GetHostName();
-Debug.WriteLine(host);
+Console.WriteLine(host);
 IPHostEntry ipHost = Dns.GetHostEntry(host);
-Debug.WriteLine(ipHost);
+Console.WriteLine(ipHost);
 IPAddress ipAddr = ipHost.AddressList[0];
-Debug.WriteLine(ipAddr);
+Console.WriteLine(ipAddr);
 IPEndPoint endPoint = new IPEndPoint(ipAddr, 7777);
 
-Socket socket = new Socket(endPoint.AddressFamily,SocketType.Stream, ProtocolType.Tcp);
-
-try
+while (true)
 {
-    socket.Connect(endPoint);  // 여기도 연결할때까지 대기하나봄
-    Console.WriteLine($"Connected To {socket.RemoteEndPoint}");
+    Socket socket = new Socket(endPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
 
-    byte[] sendBuff = Encoding.UTF8.GetBytes("Hello World!");
-    int sendBytes = socket.Send(sendBuff);
+    try
+    {
+        socket.Connect(endPoint);  // 여기도 연결할때까지 대기하나봄
+        Console.WriteLine($"Connected To {socket.RemoteEndPoint}");
 
-    byte[] recvBuff = new byte[1024];
-    int recvBytes = socket.Receive(recvBuff);
-    string recvData = Encoding.UTF8.GetString(recvBuff, 0, recvBytes);
-    Console.WriteLine($"[From Server] {recvData}");
+        for(int i = 0; i<5; i++)
+        {
+            byte[] sendBuff = Encoding.UTF8.GetBytes($"Hello World!{i} ");
+            int sendBytes = socket.Send(sendBuff);
 
-    socket.Shutdown(SocketShutdown.Both);
-    socket.Close();
-}
-catch (Exception e)
-{
-    Console.WriteLine(e.ToString());
+        }
+
+        byte[] recvBuff = new byte[1024];
+        int recvBytes = socket.Receive(recvBuff);
+        string recvData = Encoding.UTF8.GetString(recvBuff, 0, recvBytes);
+        Console.WriteLine($"[From Server] {recvData}");
+
+        socket.Shutdown(SocketShutdown.Both);
+        socket.Close();
+    }
+    catch (Exception e)
+    {
+        Console.WriteLine(e.ToString());
+    }
+
+    Thread.Sleep(100);
 }
