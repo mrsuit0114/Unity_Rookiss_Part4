@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace ServerCore
 {
-    internal class Listener
+    public class Listener
     {
-        Socket _listenSocket;
-        Func<Session> _sessionFactory;
+        Socket? _listenSocket;
+        Func<Session>? _sessionFactory;
 
         public void Init(IPEndPoint endPoint, Func<Session> sessionFactory)
         {
@@ -32,7 +32,7 @@ namespace ServerCore
         {
             args.AcceptSocket = null;  // args를 재사용할때 밀어줘야함!! 
 
-            bool pending = _listenSocket.AcceptAsync(args);
+            bool pending = _listenSocket!.AcceptAsync(args);
             if (pending == false)  // 바로 완료된 경우
                 OnAcceptCompleted(null, args);
         }
@@ -43,6 +43,7 @@ namespace ServerCore
             {
                 Session session = _sessionFactory.Invoke();
                 session.Start(args.AcceptSocket);
+                Console.WriteLine(args.AcceptSocket);
                 session.OnConnected(args.AcceptSocket.RemoteEndPoint);
             }
             else

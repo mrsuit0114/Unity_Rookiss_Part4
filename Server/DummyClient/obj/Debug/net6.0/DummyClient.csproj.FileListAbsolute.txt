@@ -28,3 +28,6 @@ D:\ForUnity\Unity_Rookiss_Part4\Server\DummyClient\obj\Debug\net6.0\refint\Dummy
 D:\ForUnity\Unity_Rookiss_Part4\Server\DummyClient\obj\Debug\net6.0\DummyClient.pdb
 D:\ForUnity\Unity_Rookiss_Part4\Server\DummyClient\obj\Debug\net6.0\DummyClient.genruntimeconfig.cache
 D:\ForUnity\Unity_Rookiss_Part4\Server\DummyClient\obj\Debug\net6.0\ref\DummyClient.dll
+D:\ForUnity\Unity_Rookiss_Part4\Server\DummyClient\bin\Debug\net6.0\ServerCore.dll
+D:\ForUnity\Unity_Rookiss_Part4\Server\DummyClient\bin\Debug\net6.0\ServerCore.pdb
+D:\ForUnity\Unity_Rookiss_Part4\Server\DummyClient\obj\Debug\net6.0\DummyClient.csproj.CopyComplete

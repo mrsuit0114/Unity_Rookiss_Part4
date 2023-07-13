@@ -13,9 +13,7 @@ C:\Users\woosa\source\repos\Server\ServerCore\obj\Debug\net6.0\refint\ServerCore
 C:\Users\woosa\source\repos\Server\ServerCore\obj\Debug\net6.0\ServerCore.pdb
 C:\Users\woosa\source\repos\Server\ServerCore\obj\Debug\net6.0\ServerCore.genruntimeconfig.cache
 C:\Users\woosa\source\repos\Server\ServerCore\obj\Debug\net6.0\ref\ServerCore.dll
-D:\ForUnity\Unity_Rookiss_Part4\Server\ServerCore\bin\Debug\net6.0\ServerCore.exe
 D:\ForUnity\Unity_Rookiss_Part4\Server\ServerCore\bin\Debug\net6.0\ServerCore.deps.json
-D:\ForUnity\Unity_Rookiss_Part4\Server\ServerCore\bin\Debug\net6.0\ServerCore.runtimeconfig.json
 D:\ForUnity\Unity_Rookiss_Part4\Server\ServerCore\bin\Debug\net6.0\ServerCore.dll
 D:\ForUnity\Unity_Rookiss_Part4\Server\ServerCore\bin\Debug\net6.0\ServerCore.pdb
 D:\ForUnity\Unity_Rookiss_Part4\Server\ServerCore\obj\Debug\net6.0\ServerCore.csproj.AssemblyReference.cache
@@ -26,5 +24,4 @@ D:\ForUnity\Unity_Rookiss_Part4\Server\ServerCore\obj\Debug\net6.0\ServerCore.cs
 D:\ForUnity\Unity_Rookiss_Part4\Server\ServerCore\obj\Debug\net6.0\ServerCore.dll
 D:\ForUnity\Unity_Rookiss_Part4\Server\ServerCore\obj\Debug\net6.0\refint\ServerCore.dll
 D:\ForUnity\Unity_Rookiss_Part4\Server\ServerCore\obj\Debug\net6.0\ServerCore.pdb
-D:\ForUnity\Unity_Rookiss_Part4\Server\ServerCore\obj\Debug\net6.0\ServerCore.genruntimeconfig.cache
 D:\ForUnity\Unity_Rookiss_Part4\Server\ServerCore\obj\Debug\net6.0\ref\ServerCore.dll
