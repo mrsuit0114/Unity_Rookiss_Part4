@@ -24,15 +24,31 @@ while (true)
 {
     ;
 }
-class GameSession : Session
+
+class Packet
+{
+    public ushort size;
+    public ushort packetId;
+}
+
+
+class GameSession : PacketSession
 {
     public override void OnConnected(EndPoint endPoint)
     {
         Console.WriteLine($"OnConnected : {endPoint}");
 
-        byte[] sendBuff = Encoding.UTF8.GetBytes("Welcome to MMORPG Server !");
-        Send(sendBuff);
-        Thread.Sleep(1000);
+        //Packet packet = new Packet() { size = 100, packetId = 10 };
+
+        //ArraySegment<byte> openSegment = SendBufferHelper.Open(4096);
+        //byte[] buffer = BitConverter.GetBytes(packet.size); 
+        //byte[] buffer2 = BitConverter.GetBytes(packet.packetId); 
+        //Array.Copy(buffer,0,openSegment.Array, openSegment.Offset, buffer.Length);
+        //Array.Copy(buffer,0,openSegment.Array, openSegment.Offset + buffer.Length, buffer2.Length);
+        //ArraySegment<byte> sendBuff = SendBufferHelper.Close(buffer.Length+buffer2.Length);
+
+        //Send(sendBuff);
+        Thread.Sleep(5000);
         Disconnect();
     }
 
@@ -41,10 +57,11 @@ class GameSession : Session
         Console.WriteLine($"OnDisconnected : {endPoint}");
     }
 
-    public override void OnRecv(ArraySegment<byte> buffer)
+    public override void OnRecvPacket(ArraySegment<byte> buffer)
     {
-        string recvData = Encoding.UTF8.GetString(buffer.Array!, buffer.Offset, buffer.Count);
-        Console.WriteLine($"[From Client] {recvData}");
+        ushort size = BitConverter.ToUInt16(buffer.Array,buffer.Offset);
+        ushort id = BitConverter.ToUInt16(buffer.Array,buffer.Offset + 2);
+        Console.WriteLine($"RecvPacketId :{id}, Size : {size}");
     }
 
     public override void OnSend(int numOfBytes)
