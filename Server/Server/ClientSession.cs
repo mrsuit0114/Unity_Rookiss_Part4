@@ -24,37 +24,52 @@ namespace Server
 
         public PlayerInfoReq()
         {
-            playerId = (ushort)PacketID.PlayerInfoReq;
+            packetId = (ushort)PacketID.PlayerInfoReq;
         }
 
-        public override void Read(ArraySegment<byte> s)
+        public override void Read(ArraySegment<byte> segment)
         {
             ushort count = 0;
 
-            //ushort size = BitConverter.ToUInt16(s.Array, s.Offset);
-            count += 2;
-            //ushort id = BitConverter.ToUInt16(s.Array, s.Offset + count);
-            count += 2;
+            ReadOnlySpan<byte> s = new ReadOnlySpan<byte>(segment.Array, segment.Offset, segment.Count);
 
-            playerId = BitConverter.ToInt64(new ReadOnlySpan<byte>(s.Array, s.Offset + count, s.Count - count));
-            count += 8;
+            count += sizeof(ushort);
+            count += sizeof(ushort);
+            playerId = BitConverter.ToInt64(s.Slice(count, s.Length - count));
+            count += sizeof(long);
+
+            // string
+            ushort nameLen = BitConverter.ToUInt16(s.Slice(count, s.Length - count));
+            count += sizeof(ushort);
+            name = Encoding.Unicode.GetString(s.Slice(count, nameLen));
+
         }
 
         public override ArraySegment<byte> Write()
         {
-            ArraySegment<byte> s = SendBufferHelper.Open(4096);
+            ArraySegment<byte> segment = SendBufferHelper.Open(4096);
 
             ushort count = 0;
             bool success = true;
 
+            Span<byte> s = new Span<byte>(segment.Array, segment.Offset, segment.Count);
+
             // 한번에 넣어주는 방법이지만 유니티에서 적용되는지는 확인해봐야한다.
             count += sizeof(ushort);
-            success &= BitConverter.TryWriteBytes(new Span<byte>(s.Array, s.Offset + count, s.Count - count), packetId);
+            // slice가 s를 변경하지는 않는다.
+            success &= BitConverter.TryWriteBytes(s.Slice(count, s.Length - count), packetId);
             count += sizeof(ushort);
-            success &= BitConverter.TryWriteBytes(new Span<byte>(s.Array, s.Offset + count, s.Count - count), playerId);
+            // 1001 을 넣는데 왜자꾸 233에 어쩌구가 들어가지 -> 1바이트 는 최대 256이라 넘어서는게 맞는데 영상은 어떻게 잘됨?
+            success &= BitConverter.TryWriteBytes(s.Slice(count, s.Length - count), playerId);
             count += sizeof(long);
 
-            success &= BitConverter.TryWriteBytes(new Span<byte>(s.Array, s.Offset, s.Count), count);
+            // string  -> c#은 문자열끝이 null이 아닌가봐 -> 길이를 따로 알아내는 메서드를 사용함
+            ushort nameLen = (ushort)Encoding.Unicode.GetByteCount(name);
+            success &= BitConverter.TryWriteBytes(s.Slice(count, s.Length - count), nameLen);
+            count += sizeof(ushort);
+            Array.Copy(Encoding.Unicode.GetBytes(name), 0, segment.Array, count, nameLen);
+            count += nameLen;
+            success &= BitConverter.TryWriteBytes(s, count);
 
             if (success == false)
                 return null;
@@ -109,7 +124,7 @@ namespace Server
                     {
                         PlayerInfoReq p = new PlayerInfoReq();
                         p.Read(buffer);
-                        Console.WriteLine($"PlayerInfoReq : {p.playerId}");
+                        Console.WriteLine($"PlayerInfoReq : {p.playerId} {p.name}");
                     }
                     break;
             }
