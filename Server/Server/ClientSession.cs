@@ -20,6 +20,7 @@ namespace Server
     class PlayerInfoReq : Packet
     {
         public long playerId;
+        public string name;
 
         public PlayerInfoReq()
         {
@@ -47,13 +48,13 @@ namespace Server
             bool success = true;
 
             // 한번에 넣어주는 방법이지만 유니티에서 적용되는지는 확인해봐야한다.
-            count += 2;
+            count += sizeof(ushort);
             success &= BitConverter.TryWriteBytes(new Span<byte>(s.Array, s.Offset + count, s.Count - count), packetId);
-            count += 2;
+            count += sizeof(ushort);
             success &= BitConverter.TryWriteBytes(new Span<byte>(s.Array, s.Offset + count, s.Count - count), playerId);
-            count += 8;
+            count += sizeof(long);
 
-            success &= BitConverter.TryWriteBytes(new Span<byte>(s.Array, s.Offset, s.Count), size);
+            success &= BitConverter.TryWriteBytes(new Span<byte>(s.Array, s.Offset, s.Count), count);
 
             if (success == false)
                 return null;
