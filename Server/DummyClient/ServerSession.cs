@@ -8,16 +8,7 @@ using System.Threading.Tasks;
 
 namespace DummyClient
 {
-    abstract class Packet
-    {
-        public ushort size;
-        public ushort packetId;
-
-        public abstract ArraySegment<byte> Write();
-        public abstract void Read(ArraySegment<byte> s);
-    }
-
-    class PlayerInfoReq : Packet
+    class PlayerInfoReq
     {
         public long playerId;
         public string name;
@@ -56,12 +47,7 @@ namespace DummyClient
 
         public List<SkillInfo> skills = new List<SkillInfo>();
 
-        public PlayerInfoReq()
-        {
-            packetId = (ushort)PacketID.PlayerInfoReq;
-        }
-
-        public override void Read(ArraySegment<byte> segment)
+        public void Read(ArraySegment<byte> segment)
         {
             ushort count = 0;
 
@@ -91,7 +77,7 @@ namespace DummyClient
 
         }
 
-        public override ArraySegment<byte> Write()
+        public ArraySegment<byte> Write()
         {
             ArraySegment<byte> segment = SendBufferHelper.Open(4096);
 
@@ -103,7 +89,7 @@ namespace DummyClient
             // 한번에 넣어주는 방법이지만 유니티에서 적용되는지는 확인해봐야한다.
             count += sizeof(ushort);
             // slice가 s를 변경하지는 않는다.
-            success &= BitConverter.TryWriteBytes(s.Slice(count,s.Length - count) , packetId);
+            success &= BitConverter.TryWriteBytes(s.Slice(count,s.Length - count) , (ushort)PacketID.PlayerInfoReq);
             count += sizeof(ushort);
             // 1001 을 넣는데 왜자꾸 233에 어쩌구가 들어가지 -> 1바이트 는 최대 256이라 넘어서는게 맞는데 영상은 어떻게 잘됨?
             success &= BitConverter.TryWriteBytes(s.Slice(count, s.Length - count), playerId);
