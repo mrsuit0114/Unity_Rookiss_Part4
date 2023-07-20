@@ -17,6 +17,9 @@ string genPackets="";
 ushort packetId = 0;
 string packetEnums="";
 
+string clientRegister = "";
+string serverRegister = "";
+
 // 나중에 Dispose로 닫거나 using을 사용해서 해당 부분에서만 사용하도록 하던가 -> 자동닫기인지는 모르겠지만 비슷하게 작용
 using (XmlReader r = XmlReader.Create(pdlPath, settings))  // exe파일 생성위치에서 찾으므로 일단은 bin -> .. ->exe있는곳에 xml복붙
 {
@@ -32,7 +35,10 @@ using (XmlReader r = XmlReader.Create(pdlPath, settings))  // exe파일 생성�
 
     string fileText = string.Format(PacketFormat.fileFormat, packetEnums, genPackets);
     File.WriteAllText("GenPackets.cs", fileText);
-
+    string clientManagerText = string.Format(PacketFormat.managerFormat, clientRegister);
+    File.WriteAllText("ClientPacketManager.cs", clientManagerText);
+    string serverManagerText = string.Format(PacketFormat.managerFormat, serverRegister);
+    File.WriteAllText("ServerPacketManager.cs", serverManagerText);
 }
 
 void ParsePacket(XmlReader r)
@@ -52,7 +58,11 @@ void ParsePacket(XmlReader r)
     Tuple<string,string,string> t = ParseMembers(r);
     genPackets += string.Format(PacketFormat.packetFormat, packetName, t.Item1,t.Item2,t.Item3);
     packetEnums += string.Format(PacketFormat.packetEnumFormat, packetName, ++packetId) + Environment.NewLine + "\t";
-
+    
+    if(packetName.StartsWith("S_")||packetName.StartsWith("s_"))
+        clientRegister+= string.Format(PacketFormat.managerRegisterFormat, packetName) + Environment.NewLine;
+    else
+        serverRegister += string.Format(PacketFormat.managerRegisterFormat, packetName) + Environment.NewLine;
 }
 
 // {1} 멤버 변수들
