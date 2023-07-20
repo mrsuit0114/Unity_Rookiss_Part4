@@ -1,0 +1,15 @@
+D:\ForUnity\Unity_Rookiss_Part4\Server\PacketGenerator\bin\Release\PacketGenerator.exe
+D:\ForUnity\Unity_Rookiss_Part4\Server\PacketGenerator\bin\Release\PacketGenerator.deps.json
+D:\ForUnity\Unity_Rookiss_Part4\Server\PacketGenerator\bin\Release\PacketGenerator.runtimeconfig.json
+D:\ForUnity\Unity_Rookiss_Part4\Server\PacketGenerator\bin\Release\PacketGenerator.dll
+D:\ForUnity\Unity_Rookiss_Part4\Server\PacketGenerator\bin\Release\PacketGenerator.pdb
+D:\ForUnity\Unity_Rookiss_Part4\Server\PacketGenerator\obj\Release\PacketGenerator.csproj.AssemblyReference.cache
+D:\ForUnity\Unity_Rookiss_Part4\Server\PacketGenerator\obj\Release\PacketGenerator.GeneratedMSBuildEditorConfig.editorconfig
+D:\ForUnity\Unity_Rookiss_Part4\Server\PacketGenerator\obj\Release\PacketGenerator.AssemblyInfoInputs.cache
+D:\ForUnity\Unity_Rookiss_Part4\Server\PacketGenerator\obj\Release\PacketGenerator.AssemblyInfo.cs
+D:\ForUnity\Unity_Rookiss_Part4\Server\PacketGenerator\obj\Release\PacketGenerator.csproj.CoreCompileInputs.cache
+D:\ForUnity\Unity_Rookiss_Part4\Server\PacketGenerator\obj\Release\PacketGenerator.dll
+D:\ForUnity\Unity_Rookiss_Part4\Server\PacketGenerator\obj\Release\refint\PacketGenerator.dll
+D:\ForUnity\Unity_Rookiss_Part4\Server\PacketGenerator\obj\Release\PacketGenerator.pdb
+D:\ForUnity\Unity_Rookiss_Part4\Server\PacketGenerator\obj\Release\PacketGenerator.genruntimeconfig.cache
+D:\ForUnity\Unity_Rookiss_Part4\Server\PacketGenerator\obj\Release\ref\PacketGenerator.dll

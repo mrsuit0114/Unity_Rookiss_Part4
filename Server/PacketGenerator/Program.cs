@@ -2,18 +2,23 @@
 using System.Xml;
 
 
+string pdlPath = "../../PDL.xml";  // 난 Debug폴더안에 있으므로 두번 나와야함
+
 XmlReaderSettings settings = new XmlReaderSettings()
 {
     IgnoreComments = true,
     IgnoreWhitespace = true,
 };
 
+if(args.Length>=1)
+    pdlPath = args[0];
+
 string genPackets="";
 ushort packetId = 0;
 string packetEnums="";
 
 // 나중에 Dispose로 닫거나 using을 사용해서 해당 부분에서만 사용하도록 하던가 -> 자동닫기인지는 모르겠지만 비슷하게 작용
-using (XmlReader r = XmlReader.Create("PDL.xml", settings))  // exe파일 생성위치에서 찾으므로 일단은 bin -> .. ->exe있는곳에 xml복붙
+using (XmlReader r = XmlReader.Create(pdlPath, settings))  // exe파일 생성위치에서 찾으므로 일단은 bin -> .. ->exe있는곳에 xml복붙
 {
     r.MoveToContent();  // 헤더 건너뛰고 여기에서는 <packet>으로 바로 들어간다고함
 
