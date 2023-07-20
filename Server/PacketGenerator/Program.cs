@@ -9,6 +9,8 @@ XmlReaderSettings settings = new XmlReaderSettings()
 };
 
 string genPackets="";
+ushort packetId = 0;
+string packetEnums="";
 
 // 나중에 Dispose로 닫거나 using을 사용해서 해당 부분에서만 사용하도록 하던가 -> 자동닫기인지는 모르겠지만 비슷하게 작용
 using (XmlReader r = XmlReader.Create("PDL.xml", settings))  // exe파일 생성위치에서 찾으므로 일단은 bin -> .. ->exe있는곳에 xml복붙
@@ -23,7 +25,8 @@ using (XmlReader r = XmlReader.Create("PDL.xml", settings))  // exe파일 생성
         //Console.WriteLine(r.Name + " " + r["name"]);  // packet PlayerInfoReq...
     }
 
-    File.WriteAllText("GenPackets.cs", genPackets);
+    string fileText = string.Format(PacketFormat.fileFormat, packetEnums, genPackets);
+    File.WriteAllText("GenPackets.cs", fileText);
 
 }
 
@@ -43,6 +46,7 @@ void ParsePacket(XmlReader r)
 
     Tuple<string,string,string> t = ParseMembers(r);
     genPackets += string.Format(PacketFormat.packetFormat, packetName, t.Item1,t.Item2,t.Item3);
+    packetEnums += string.Format(PacketFormat.packetEnumFormat, packetName, ++packetId) + Environment.NewLine + "\t";
 
 }
 
@@ -81,6 +85,12 @@ Tuple<string,string,string> ParseMembers(XmlReader r)
         string memberType = r.Name.ToLower();
         switch (memberType)
         {
+            case "byte":
+            case "sbyte":
+                memberCode += string.Format(PacketFormat.memberFormat, memberType, memeberName);
+                readCode += string.Format(PacketFormat.readByteFormat, memeberName, memberType);
+                writeCode += string.Format(PacketFormat.writeByteFormat, memeberName, memberType);
+                break;
             case "bool":
             case "short":
             case "ushort":
