@@ -9,6 +9,8 @@ using System.Text;
 
 Listener _listener = new Listener();
 
+PacketManager.Instance.Register();
+
 string host = Dns.GetHostName();
 //Console.WriteLine(host);
 IPHostEntry ipHost = Dns.GetHostEntry(host);
