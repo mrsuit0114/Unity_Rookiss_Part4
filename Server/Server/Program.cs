@@ -1,30 +1,35 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 using Server;
+using Server.Session;
 using ServerCore;
 using System.Diagnostics;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
 
-Listener _listener = new Listener();
+class Program{
+    static Listener _listener = new Listener();
+    public static GameRoom Room = new GameRoom();
 
-PacketManager.Instance.Register();
+    static void Main(string[] args)
+    {
+        string host = Dns.GetHostName();
+        //Console.WriteLine(host);
+        IPHostEntry ipHost = Dns.GetHostEntry(host);
+        //Console.WriteLine(ipHost);
+        IPAddress ipAddr = ipHost.AddressList[0];
+        //Console.WriteLine(ipAddr);
+        IPEndPoint endPoint = new IPEndPoint(ipAddr, 7777);
 
-string host = Dns.GetHostName();
-//Console.WriteLine(host);
-IPHostEntry ipHost = Dns.GetHostEntry(host);
-//Console.WriteLine(ipHost);
-IPAddress ipAddr = ipHost.AddressList[0];
-//Console.WriteLine(ipAddr);
-IPEndPoint endPoint = new IPEndPoint(ipAddr, 7777);
 
+        _listener.Init(endPoint, () => { return SessionManager.Instance.Generate(); });
+        Console.WriteLine("Listening...");
 
-_listener.Init(endPoint, () => { return new ClientSession(); });
-Console.WriteLine("Listening...");
-
-while (true)
-{
-    ;
+        while (true)
+        {
+            ;
+        }
+    }
 }
 

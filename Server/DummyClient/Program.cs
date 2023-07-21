@@ -16,7 +16,7 @@ IPEndPoint endPoint = new IPEndPoint(ipAddr, 7777);
 
 Connector connector = new Connector();
 
-connector.Connect(endPoint, () => { return new ServerSession(); });
+connector.Connect(endPoint, () => { return SessionManager.Instance.Generate(); },100);
 
 while (true)
 {
@@ -24,17 +24,12 @@ while (true)
 
     try
     {
-        socket.Connect(endPoint);  // 여기도 연결할때까지 대기하나봄
-        Console.WriteLine($"Connected To {socket.RemoteEndPoint}");
-
-        Thread.Sleep(100);
-
-        socket.Shutdown(SocketShutdown.Both);
-        socket.Close();
+        SessionManager.Instance.SendForEach();
     }
     catch (Exception e)
     {
         Console.WriteLine(e.ToString());
     }
 
+    Thread.Sleep(250);  // 일반적인 mmo에서 이동패킷을 1초에 4번 전송한다고함
 }

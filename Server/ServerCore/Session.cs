@@ -60,6 +60,15 @@ namespace ServerCore
         public abstract void OnSend(int numOfBytes);
         public abstract void OnDisconnected(EndPoint endPoint) ;
 
+        void Clear()
+        {
+            lock (_lock)
+            {
+                _sendQueue.Clear();
+                _pendingList.Clear();
+            }
+        }
+
 
 
         public void Start(Socket socket)
@@ -93,12 +102,15 @@ namespace ServerCore
             OnDisconnected(_socket.RemoteEndPoint);
             _socket.Shutdown(SocketShutdown.Both);
             _socket.Close();
+            Clear();
         }
 
         #region network cm
 
         void RegisterSend()
         {
+            if (_disconnected == 1) return;
+
             //byte[] buff = _sendQueue.Dequeue();
             //_sendArgs.SetBuffer(buff, 0, buff.Length);  // 버퍼 하나씩 전달하는 방식
 
@@ -113,10 +125,13 @@ namespace ServerCore
 
             _sendArgs.BufferList = _pendingList;
 
-
-            bool pending = _socket.SendAsync(_sendArgs);  // 실제 보내는 코드
-            if (pending == false)
-                OnSendCompleted(null, _sendArgs);
+            try
+            {
+                bool pending = _socket.SendAsync(_sendArgs);  // 실제 보내는 코드
+                if (pending == false)
+                    OnSendCompleted(null, _sendArgs);
+            }
+            catch (Exception e) { Console.WriteLine($"RegisterSend Failed {e}"); }
         }
 
         void OnSendCompleted(object? sender, SocketAsyncEventArgs args)  // Send를 통해서오는게 아니라 이벤트핸들러를 통해 올 경우를
@@ -153,13 +168,18 @@ namespace ServerCore
 
         void RegisterRecv()
         {
+            if(_disconnected == 1) return;
+
             _recvBuffer.Clean();
             ArraySegment<byte> segment = _recvBuffer.WriteSegment;
             _recvArgs.SetBuffer(segment.Array, segment.Offset, segment.Count);
 
-            bool pending = _socket.ReceiveAsync(_recvArgs);
-            if (pending == false)
-                OnRecvCompleted(null, _recvArgs);
+            try
+            {
+                bool pending = _socket.ReceiveAsync(_recvArgs);
+                if (pending == false)
+                    OnRecvCompleted(null, _recvArgs);
+            }catch (Exception e) { Console.WriteLine($"RegisterRecv Failed {e}"); };
         
         }
 

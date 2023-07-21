@@ -11,18 +11,21 @@ namespace ServerCore
     public class Connector
     {
         Func<Session> _sessionFactory;
-        public void Connect(IPEndPoint endPoint, Func<Session> sessionFactory)
+        public void Connect(IPEndPoint endPoint, Func<Session> sessionFactory, int count = 1)
         {
-            // 여러번 받을 수 있으므로 굳이 밖에서 선언하지 않음 -> 여러번 초기화하고 할당하는 것보다 이게 나아보임
-            Socket socket = new Socket(endPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-            _sessionFactory = sessionFactory;
+            for (int i =0; i < count; i++)
+            {
+                // 여러번 받을 수 있으므로 굳이 밖에서 선언하지 않음 -> 여러번 초기화하고 할당하는 것보다 이게 나아보임
+                Socket socket = new Socket(endPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+                _sessionFactory = sessionFactory;
 
-            SocketAsyncEventArgs args = new SocketAsyncEventArgs();
-            args.Completed += OnConnectCompleted;
-            args.RemoteEndPoint = endPoint;
-            args.UserToken = socket;
+                SocketAsyncEventArgs args = new SocketAsyncEventArgs();
+                args.Completed += OnConnectCompleted;
+                args.RemoteEndPoint = endPoint;
+                args.UserToken = socket;
 
-            RegisterConnect(args);
+                RegisterConnect(args);
+            }
         }
 
         void RegisterConnect(SocketAsyncEventArgs args)
