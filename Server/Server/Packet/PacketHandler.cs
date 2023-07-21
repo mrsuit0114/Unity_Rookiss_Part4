@@ -1,4 +1,5 @@
-﻿using Server.Session;
+﻿using Server;
+using Server.Session;
 using ServerCore;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,8 @@ class PacketHandler
         if (clientSession.Room == null)
             return;
 
-        clientSession.Room.Broadcast(clientSession, chatPacket.chat);
+        GameRoom room = clientSession.Room;
+        room.Push(() => room.Broadcast(clientSession, chatPacket.chat));
     }
 }
 
