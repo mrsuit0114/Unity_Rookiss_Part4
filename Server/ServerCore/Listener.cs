@@ -13,18 +13,24 @@ namespace ServerCore
         Socket? _listenSocket;
         Func<Session>? _sessionFactory;
 
-        public void Init(IPEndPoint endPoint, Func<Session> sessionFactory)
+        public void Init(IPEndPoint endPoint, Func<Session> sessionFactory, int register = 10, int backlog = 100)
         {
             _listenSocket = new Socket(endPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
             _sessionFactory += sessionFactory;
 
             _listenSocket.Bind(endPoint);
-            _listenSocket.Listen(10);
 
-            // 처음만 직접 시도하고 이후는 메서드끼리 서로 물면서 호출함
-            SocketAsyncEventArgs args = new SocketAsyncEventArgs();
-            args.Completed += new EventHandler<SocketAsyncEventArgs>(OnAcceptCompleted);  // 이벤트를 달아서 확정가능
-            RegisterAccept(args);  // 한번 시도해봄 되면 좋고 안되면 이벤트핸들러를 통해 연결됨을 확인할 것
+            //backlog : 최대 대기수
+            _listenSocket.Listen(backlog);
+
+            for(int i =0; i< register; i++)
+            {
+                // 처음만 직접 시도하고 이후는 메서드끼리 서로 물면서 호출함
+                SocketAsyncEventArgs args = new SocketAsyncEventArgs();
+                args.Completed += new EventHandler<SocketAsyncEventArgs>(OnAcceptCompleted);  // 이벤트를 달아서 확정가능
+                RegisterAccept(args);  // 한번 시도해봄 되면 좋고 안되면 이벤트핸들러를 통해 연결됨을 확인할 것
+            }
+
 
         }
 
