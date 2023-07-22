@@ -26,13 +26,10 @@ namespace ServerCore
                 _jobQueue.Enqueue(job);
                 if(_flush == false)
                     flush = _flush = true;
-
             }
-
             if (flush)
                 Flush();
         }
-
         void Flush()
         {
             while (true)
@@ -44,7 +41,6 @@ namespace ServerCore
                 action.Invoke();
             }
         }
-
         Action Pop() // 왜 이건 인터페이스로 구현하지 않는가?
         {
             lock( _lock)

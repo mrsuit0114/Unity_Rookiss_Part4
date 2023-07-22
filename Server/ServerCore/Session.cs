@@ -15,6 +15,7 @@ namespace ServerCore
         public sealed override int OnRecv(ArraySegment<byte> buffer)  // sealed -> 상속받은 클래스가 오버라이드 못함
         {
             int processLen = 0;
+            int packetCount = 0;
 
             while (true)
             {
@@ -29,10 +30,13 @@ namespace ServerCore
 
                 // 여기까지 왔으면 패킷 조립 가능
                 OnRecvPacket(new ArraySegment<byte>(buffer.Array,buffer.Offset,dataSize));
-
+                packetCount++;
                 processLen += dataSize;
                 buffer = new ArraySegment<byte>(buffer.Array,buffer.Offset + dataSize, buffer.Count - dataSize);
             }
+
+            if(packetCount> 1)
+                Console.WriteLine($"packet stack send : {packetCount}");
 
             return processLen;
         }
@@ -47,7 +51,7 @@ namespace ServerCore
         Socket _socket;
         int _disconnected = 0;
 
-        RecvBuffer _recvBuffer = new RecvBuffer(1024);
+        RecvBuffer _recvBuffer = new RecvBuffer(65535);
 
         object _lock = new object();
         Queue<ArraySegment<byte>> _sendQueue = new Queue<ArraySegment<byte>>();
@@ -81,6 +85,20 @@ namespace ServerCore
 
             RegisterRecv();
 
+        }
+
+        public void Send(List<ArraySegment<byte>> sendBuffList)
+        {
+            if (sendBuffList.Count == 0)
+                return;
+            lock (_lock)  // 락을 가질때까지 대기하므로 ..1
+            {
+                foreach(ArraySegment<byte> sendBuff in sendBuffList)
+                    _sendQueue.Enqueue(sendBuff);
+
+                if (_pendingList.Count == 0)  // pending == false
+                    RegisterSend();
+            }
         }
 
         public void Send(ArraySegment<byte> sendBuff)

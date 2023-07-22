@@ -11,7 +11,7 @@ namespace ServerCore
         // 멀티 쓰레드 고려 -> 일회용인 버퍼이므로 쓰레드로컬로 생성
         public static ThreadLocal<SendBuffer> CurrentBuffer = new ThreadLocal<SendBuffer>(() => { return null; });
 
-        public static int ChunkSize { get; set; } = 4096 * 100;
+        public static int ChunkSize { get; set; } = 65535 * 100;
 
         public static ArraySegment<byte> Open(int reserveSize)
         {
