@@ -11,6 +11,11 @@ namespace PacketGenerator
         // {0} 패킷 등록
         public static string managerFormat =
 @"using ServerCore;
+using System;
+using System.Collections.Generic;
+
+//Unity
+
 internal class PacketManager
 {{
     #region Singleton
@@ -69,6 +74,7 @@ internal class PacketManager
         // {1} 패킷 목록
         public static string fileFormat =
 @"using ServerCore;
+using System;
 using System.Net;
 using System.Text;
 

@@ -15,6 +15,7 @@ namespace Server
         public int CompareTo(JobTimerElem other)
         {
             return other.execTick - execTick;  //execTick이 작은것이 우선순위가 높다
+            // 실수했다더라 이렇게하면 오름차순이라는데 나중에 고친다니까 그때가서함
         }
     }
 
