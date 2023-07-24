@@ -1,5 +1,6 @@
 using ServerCore;
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Text;
 
@@ -210,7 +211,7 @@ public class S_PlayerList : IPacket
 
     public ArraySegment<byte> Write()
     {
-        ArraySegment<byte> segment = SendBufferHelper.Open(4096);
+        ArraySegment<byte> segment = SendBufferHelper.Open(40960);
         ushort count = 0;
         bool success = true;
 

@@ -85,6 +85,7 @@ public class PacketManager
         public static string fileFormat =
 @"using ServerCore;
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Text;
 
