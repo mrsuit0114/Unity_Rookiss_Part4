@@ -16,7 +16,7 @@ using System.Collections.Generic;
 
 //Unity
 
-internal class PacketManager
+public class PacketManager
 {{
     #region Singleton
     static PacketManager _instance = new PacketManager();
@@ -116,7 +116,7 @@ public interface IPacket
         // {3} 멤버 변수 Write
         public static string packetFormat =  // string이 길어질때 @"내용";
 @"
-class {0} : IPacket
+public class {0} : IPacket
 {{
     {1}
 
